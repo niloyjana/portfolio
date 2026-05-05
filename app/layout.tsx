@@ -70,10 +70,11 @@ export default function RootLayout({
     <html lang="en" className="overscroll-y-none">
       <body
         className={`${soriaFont.variable} ${vercettiFont.variable} font-sans antialiased`}
+        suppressHydrationWarning
       >
         {children}
+        <GoogleAnalytics gaId={''}/>
       </body>
-      <GoogleAnalytics gaId={''}/>
     </html>
   );
 }
