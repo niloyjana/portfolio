@@ -33,8 +33,8 @@ const WindowModel = (props: Partial<THREE.Object3D>) => {
   const { nodes, materials } = useGLTF('models/window.glb', true ) as unknown as GLTFResult
   const data = useScroll();
   useFrame(() => {
-    const b = data.range(0.4, 0.1);
-    const c = data.range(0.5, 0.1);
+    const b = data.range(0.25, 0.1);
+    const c = data.range(0.35, 0.1);
 
     if (handleRef.current) {
       handleRef.current.rotation.y = -0.5 * Math.PI * b;

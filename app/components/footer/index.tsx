@@ -108,7 +108,7 @@ const Footer = () => {
   };
 
   return (
-    <group position={[0, -44, 18]} rotation={[-Math.PI / 2, 0, 0]} ref={groupRef}>
+    <group position={[0, -79, 18]} rotation={[-Math.PI / 2, 0, 0]} ref={groupRef}>
       <group>
         { getLinks() }
       </group>

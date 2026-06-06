@@ -15,13 +15,15 @@ const ScrollWrapper = (props: { children: React.ReactNode | React.ReactNode[]}) 
 
   useFrame((state, delta) => {
     if (data) {
-      const a = data.range(0, 0.3);
-      const b = data.range(0.3, 0.5);
-      const d = data.range(0.85, 0.18);
+      const a = data.range(0, 0.25);
+      const b1 = data.range(0.25, 0.15);
+      const b2 = data.range(0.40, 0.15);
+      const b3 = data.range(0.55, 0.15);
+      const d = data.range(0.80, 0.20);
 
       if (!isActive) {
         camera.rotation.x = THREE.MathUtils.damp(camera.rotation.x, -0.5 * Math.PI * a, 5, delta);
-        camera.position.y = THREE.MathUtils.damp(camera.position.y, -37 * b, 7, delta);
+        camera.position.y = THREE.MathUtils.damp(camera.position.y, -25 * b1 - 25 * b2 - 24 * b3, 7, delta);
         camera.position.z = THREE.MathUtils.damp(camera.position.z, 5 + 10 * d, 7, delta);
 
         setScrollProgress(data.range(0, 1));
