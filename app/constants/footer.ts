@@ -23,6 +23,6 @@ export const FOOTER_LINKS: FooterLink[] = [
     name: 'Resume',
     hoverText: 'Download',
     icon: 'icons/file.svg',
-    url: './RESUME .pdf',
+    url: './resume_niloyjana.pdf',
   }
 ];
