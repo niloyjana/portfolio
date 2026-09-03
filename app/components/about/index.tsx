@@ -28,9 +28,9 @@ const About = () => {
     color: "#e2e8f0",
     maxWidth: isMobile ? 2.6 : 7.8,
     lineHeight: 1.5,
-    anchorX: (isMobile ? "center" : "left") as const,
+    anchorX: isMobile ? ("center" as const) : ("left" as const),
     anchorY: "top" as const,
-    textAlign: (isMobile ? "center" : "left") as const,
+    textAlign: isMobile ? ("center" as const) : ("left" as const),
   };
 
   const paragraphs = [
