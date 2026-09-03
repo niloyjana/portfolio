@@ -4,6 +4,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { isMobile } from "react-device-detect";
 import * as THREE from "three";
+import { useEffect } from "react";
 
 import { usePortalStore, useScrollStore } from "@stores";
 
@@ -12,21 +13,29 @@ const ScrollWrapper = (props: { children: React.ReactNode | React.ReactNode[]}) 
   const data = useScroll();
   const isActive = usePortalStore((state) => !!state.activePortalId);
   const setScrollProgress = useScrollStore((state) => state.setScrollProgress);
+  const setScrollEl = useScrollStore((state) => state.setScrollEl);
+
+  useEffect(() => {
+    if (data && data.el) {
+      setScrollEl(data.el);
+    }
+  }, [data, setScrollEl]);
 
   useFrame((state, delta) => {
     if (data) {
       const a = data.range(0, 0.25);
-      const b1 = data.range(0.25, 0.15);
-      const b2 = data.range(0.40, 0.15);
-      const b3 = data.range(0.55, 0.15);
-      const d = data.range(0.80, 0.20);
+      const b = data.range(0.25, 0.40);
+      const d = data.range(0.76, 0.18);
 
       if (!isActive) {
         camera.rotation.x = THREE.MathUtils.damp(camera.rotation.x, -0.5 * Math.PI * a, 5, delta);
-        camera.position.y = THREE.MathUtils.damp(camera.position.y, -25 * b1 - 25 * b2 - 24 * b3, 7, delta);
+        camera.position.y = THREE.MathUtils.damp(camera.position.y, -37 * b, 7, delta);
         camera.position.z = THREE.MathUtils.damp(camera.position.z, 5 + 10 * d, 7, delta);
 
-        setScrollProgress(data.range(0, 1));
+        const newProgress = data.range(0, 1);
+        if (Math.abs(useScrollStore.getState().scrollProgress - newProgress) > 0.001) {
+          setScrollProgress(newProgress);
+        }
       }
 
       // Move camera slightly on mouse movement.

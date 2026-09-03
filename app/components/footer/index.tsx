@@ -85,35 +85,7 @@ const FooterLinkItem = ({ link }: { link: FooterLink }) => {
 }
 
 const Footer = () => {
-  const groupRef = useRef<THREE.Group>(null);
-  const data = useScroll();
-
-  useFrame(() => {
-    const d = data.range(0.8, 0.2);
-    if (groupRef.current) {
-      groupRef.current.visible = d > 0;
-    }
-  });
-
-  const getLinks = () => {
-    const spacing = isMobile ? 1.1 : 2;
-    const totalWidth = (FOOTER_LINKS.length - 1) * spacing;
-    return FOOTER_LINKS.map((link, i) => {
-      return (
-        <group key={i} position={[i * spacing - totalWidth / 2, 0, 0]}>
-          <FooterLinkItem link={link}/>
-        </group>
-      );
-    });
-  };
-
-  return (
-    <group position={[0, -79, 18]} rotation={[-Math.PI / 2, 0, 0]} ref={groupRef}>
-      <group>
-        { getLinks() }
-      </group>
-    </group>
-  );
+  return null;
 };
 
 export default Footer;

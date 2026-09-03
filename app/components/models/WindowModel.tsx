@@ -29,12 +29,14 @@ type GLTFResult = GLTF & {
 const WindowModel = (props: Partial<THREE.Object3D>) => {
   const handleRef = useRef<THREE.Mesh>(null);
   const windowRef = useRef<THREE.Mesh>(null);
+  const frameRef = useRef<THREE.Group>(null);
 
   const { nodes, materials } = useGLTF('models/window.glb', true ) as unknown as GLTFResult
   const data = useScroll();
   useFrame(() => {
-    const b = data.range(0.25, 0.1);
-    const c = data.range(0.35, 0.1);
+    const b = data.range(0.45, 0.04);
+    const c = data.range(0.48, 0.05); // Pane opens fully before camera hits
+    const d = data.range(0.48, 0.15); // Frame tilts slowly matching text
 
     if (handleRef.current) {
       handleRef.current.rotation.y = -0.5 * Math.PI * b;
@@ -42,10 +44,13 @@ const WindowModel = (props: Partial<THREE.Object3D>) => {
     if (windowRef.current) {
       windowRef.current.rotation.z = 0.5 * Math.PI * c;
     }
+    if (frameRef.current) {
+      frameRef.current.rotation.y = -0.5 * Math.PI * d;
+    }
   });
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} ref={frameRef}>
       <group rotation={[0, Math.PI, Math.PI]}>
         <mesh
           castShadow

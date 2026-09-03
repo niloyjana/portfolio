@@ -44,25 +44,27 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
 
     hoverAnimRef.current = gsap.timeline();
     hoverAnimRef.current
-      .to(projectRef.current.position, { z: hovered ? 1 : 0, duration: 0.2 }, 0)
-      .to(projectRef.current.position, { y: hovered ? 0.4 : 0 }, 0)
+      .to(projectRef.current.position, { z: hovered ? 1 : 0, duration: 0.3, ease: "power2.out" }, 0)
+      .to(projectRef.current.position, { y: hovered ? 0.4 : 0, duration: 0.3, ease: "power2.out" }, 0)
       .to(projectRef.current.scale, {
         x: hovered ? 1.3 : 1,
         y: hovered ? 1.3 : 1,
         z: hovered ? 1.3 : 1,
+        duration: 0.3,
+        ease: "back.out(1.5)",
       }, 0)
-      .to(title.position, { y: hovered ? 0.7 : -0.8 }, 0)
-      .to(textBox.position, { y: hovered ? 0.7 : 0 }, 0)
-      // .to(textBox.scale, { y: hovered ? 1 : 0, x: hovered ? 1 : 0 }, 0)
-      .to(textBox, { fillOpacity: hovered ? 1 : 0, duration: 0.4 }, 0)
-      .to(mesh.scale, { y: hovered ? 2 : 1 }, 0)
-      .to((mesh as THREE.Mesh).material, { opacity: hovered ? 0.95 : 0.3 }, 0)
-      .to(mesh.position, { y: hovered ? 1 : 0 }, 0);
+      .to(title.position, { y: hovered ? 0.7 : -0.8, duration: 0.3 }, 0)
+      .to(textBox.position, { y: hovered ? 0.7 : 0, duration: 0.3 }, 0)
+      .to(textBox, { fillOpacity: hovered ? 1 : 0, duration: 0.3 }, 0)
+      .to(mesh.scale, { y: hovered ? 2 : 1, duration: 0.3 }, 0)
+      .to(mesh.position, { y: hovered ? 1 : 0, duration: 0.3 }, 0)
+      .to((mesh as THREE.Mesh).material, { opacity: hovered ? 0.95 : 0.3 }, 0);
 
     if (project.url) {
       hoverAnimRef.current
-        .to(button.scale, { y: hovered ? 1 : 0, x: hovered ? 1 : 0 }, 0)
-        .to(button.position, { y: hovered ? -0.8 : -0.6, z: hovered ? 0.3 : -1 }, 0);
+        // scale: 0,0,1 → 1,1,1; Y: -0.6 (resting) → -0.8 (hovered); Z: -1 → 0.3
+        .to(button.scale, { y: hovered ? 1 : 0, x: hovered ? 1 : 0, duration: 0.3 }, 0)
+        .to(button.position, { y: hovered ? -0.8 : -0.6, z: hovered ? 0.3 : -1, duration: 0.3 }, 0);
     }
   }, [hovered]);
 
@@ -70,8 +72,9 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
     if (projectRef.current) {
       gsap.to(projectRef.current.position, {
         y: isProjectSectionActive ? 0 : -10,
-        duration: 1,
-        delay: isProjectSectionActive ? index * 0.1 : 0,
+        duration: 1.5,
+        ease: "expo.out",
+        delay: isProjectSectionActive ? index * 0.15 : 0,
       });
     }
   }, [isProjectSectionActive]);
@@ -96,7 +99,6 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
         <mesh>
           <planeGeometry args={[4.2, 2, 1]} />
           <meshBasicMaterial color="#FFF" transparent opacity={0.3}/>
-          {/* <meshPhysicalMaterial transmission={1} roughness={0.3} /> */}
           <Edges color="black" lineWidth={1.5} />
         </mesh>
         <Text

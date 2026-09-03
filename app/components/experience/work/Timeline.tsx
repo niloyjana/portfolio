@@ -12,7 +12,7 @@ import { WorkTimelinePoint } from "@types";
 const reusableLeft = new THREE.Vector3(-0.3, 0, -0.1);
 const reusableRight = new THREE.Vector3(0.3, 0, -0.1);
 
-const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number }) => {
+const TimelinePoint = ({ point, diff, fade }: { point: WorkTimelinePoint, diff: number, fade: number }) => {
   const getPoint = useMemo(() => {
     switch (point.position) {
       case 'left': return reusableLeft;
@@ -21,7 +21,16 @@ const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number
     }
   }, [point.position]);
 
+  const getDetailsPoint = useMemo(() => {
+    switch (point.position) {
+      case 'left': return reusableRight;
+      case 'right': return reusableLeft;
+      default: return new THREE.Vector3();
+    }
+  }, [point.position]);
+
   const textAlign = point.position === 'left' ? 'right' : 'left';
+  const detailsTextAlign = point.position === 'left' ? 'left' : 'right';
 
   const textProps: Partial<TextProps> = useMemo(() => ({
     font: "./Vercetti-Regular.woff",
@@ -29,6 +38,14 @@ const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number
     anchorX: textAlign,
     fillOpacity: 2 - 2 * diff,
   }), [textAlign, diff]);
+
+  const detailsTextProps: Partial<TextProps> = useMemo(() => ({
+    color: "#e2e8f0", // slightly softer white
+    anchorX: "center",
+    textAlign: "center",
+    letterSpacing: 0.05,
+    fillOpacity: fade * 0.85, // slightly transparent for softer look
+  }), [fade]);
 
   const titleProps = useMemo(() => ({
     ...textProps,
@@ -57,6 +74,20 @@ const TimelinePoint = ({ point, diff }: { point: WorkTimelinePoint, diff: number
             </Text>
           </group>
         </group>
+        {point.details && (
+          <group position={getDetailsPoint}>
+            <Text 
+              {...detailsTextProps} 
+              fontSize={0.12} 
+              maxWidth={2.85} 
+              anchorY="top" 
+              position={[point.position === 'left' ? (diff / 2) + 5.0 : (-diff / 2) - 2.5, 0.2, 0]} 
+              lineHeight={1.5}
+            >
+              {point.details}
+            </Text>
+          </group>
+        )}
       </group>
     </group>
   );
@@ -79,7 +110,7 @@ const Timeline = ({ progress }: { progress: number }) => {
     if (isActive) {
       const position = curve.getPoint(progress);
       camera.position.x = THREE.MathUtils.damp(camera.position.x, (isMobile ? -1 : -2) + position.x, 4, delta);
-      camera.position.y = THREE.MathUtils.damp(camera.position.y, -74 + position.z, 4, delta);
+      camera.position.y = THREE.MathUtils.damp(camera.position.y, -39 + position.z, 4, delta);
       camera.position.z = THREE.MathUtils.damp(camera.position.z, 13 - position.y, 4, delta);
     }
   });
@@ -138,8 +169,11 @@ const Timeline = ({ progress }: { progress: number }) => {
       )}
       <group ref={groupRef}>
         {visibleTimelinePoints.map((point, i) => {
-          const diff = Math.min(2 * Math.max(i - (progress * (timeline.length - 1)), 0), 1);
-          return <TimelinePoint point={point} key={i} diff={diff} />;
+          const rawDistance = i - (progress * (timeline.length - 1));
+          const diff = Math.min(2 * Math.max(rawDistance, 0), 1);
+          // Fade is 1 when rawDistance is 0, fading to 0 as it goes to -1 or 1
+          const fade = Math.max(1 - Math.abs(rawDistance * 1.5), 0);
+          return <TimelinePoint point={point} key={i} diff={diff} fade={fade} />;
         })}
       </group>
     </group>

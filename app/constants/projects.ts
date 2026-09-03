@@ -3,9 +3,14 @@ import { Project } from "../types";
 // TODO: Move this to API
 export const PROJECTS: Project[] = [
   {
-    title: 'Sign Language Detector',
-    date: '2025',
-    subtext: 'Real-time hand gesture recognition system using OpenCV, MediaPipe, and Scikit-Learn for touch-free interaction.',
+    title: 'FoodBridge',
+    date: '2026',
+    subtext: 'A full-stack platform connecting surplus food donors with NGOs and shelters, built with Next.js, FastAPI, and real-time geolocation to minimize food waste and maximize community impact.',
+    url: 'https://github.com/niloyjana',
+  },
+  {
+    title: 'AirForm-0.1',
+    subtext: 'Developed AirForm-0.1, an interactive 3D shape simulator leveraging Computer Vision, MediaPipe, and OpenCV to enable touchless gesture-controlled manipulation of geometric point-clouds in real-time.',
     url: 'https://github.com/niloyjana',
   },
   {
@@ -31,13 +36,14 @@ export const PROJECTS: Project[] = [
     url: 'https://github.com/niloyjana',
   },
   {
-    title: 'AirForm-0.1',
-    subtext: 'Developed AirForm-0.1, an interactive 3D shape simulator leveraging Computer Vision, MediaPipe, and OpenCV to enable touchless gesture-controlled manipulation of geometric point-clouds in real-time.',
+    title: 'Sign Language Detector',
+    date: '2025',
+    subtext: 'Real-time hand gesture recognition system using OpenCV, MediaPipe, and Scikit-Learn for touch-free interaction.',
     url: 'https://github.com/niloyjana',
   },
   {
     title: 'Chatbot',
     subtext: 'Built a natural language chatbot using FastAPI and Google Gemini AI that utilizes secure API key management to deliver intelligent, real-time responses across an interactive Next.js interface.',
     url: 'https://github.com/niloyjana',
-  }
+  },
 ];

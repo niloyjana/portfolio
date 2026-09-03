@@ -21,6 +21,7 @@ export const WORK_TIMELINE: WorkTimelinePoint[] = [
     year: 'Mar-May 2026',
     title: 'Pratinik Infotech',
     subtitle: 'Artificial Intelligence Intern',
+    details: 'Predictive Maintenance ML Pipeline\n\nEngineered time-series features (rolling stats, lag variables, degradation trends) from sensor data and applied anomaly detection to achieve ~89% failure-prediction accuracy, reducing equipment downtime by ~30%. Built a real-time monitoring pipeline with an interactive health-metrics dashboard, using feature importance analysis to surface key failure-driving signals.',
     position: 'left',
   },
   {
@@ -28,6 +29,7 @@ export const WORK_TIMELINE: WorkTimelinePoint[] = [
     year: 'Apr-Jul 2026',
     title: 'KreupAi Technologies',
     subtitle: 'AI/ML Engineer Intern',
+    details: 'AISA — Multi-Agent LLM Platform\n\nOrchestrated 25 AI agents — including an AI AP Officer and AI QA Coordinator — to automate enterprise finance and QA workflows. Built an NLP-driven invoice processing agent (~75% reduction in manual processing) and a RAG pipeline using pgvector for semantic search, alongside a standalone FastAPI server exposing core agent functionality.',
     position: 'left',
   },
   {
@@ -35,6 +37,7 @@ export const WORK_TIMELINE: WorkTimelinePoint[] = [
     year: 'PRESENT',
     title: 'Aspiring AI Engineer',
     subtitle: 'Building the future',
+    details: "I'm Niloy Jana, a Computer Science undergrad and an aspiring AI engineer. My foundation is core CS — I'm just as comfortable building full-stack web applications as I am designing AI systems — and over the past year that's pulled me toward multi-agent LLM systems and RAG pipelines specifically. I've moved from coursework into real production experience: building and orchestrating multi-agent systems, working with retrieval-augmented generation, and shipping computer vision models that hold up outside a notebook. I like owning a system end-to-end, from the reasoning logic down to how it actually runs in production.",
     position: 'right',
   }
 ]

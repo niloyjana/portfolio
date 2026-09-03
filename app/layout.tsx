@@ -14,7 +14,7 @@ const vercettiFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Niloy Jana ✌️",
+  title: "Niloy's Portfolio",
   description: "An AI/ML Engineer by profession, a creative at heart.",
   keywords: "Niloy Jana, AI/ML Engineer, Artificial Intelligence, Machine Learning, React, Three.js, Creative Developer, Web Development, Python, JavaScript, TypeScript, Portfolio",
   authors: [{ name: "Niloy Jana" }],
@@ -72,7 +72,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
-        <GoogleAnalytics gaId={''}/>
+        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID}/>}
       </body>
     </html>
   );

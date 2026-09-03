@@ -5,6 +5,7 @@ export interface WorkTimelinePoint {
   year: string,
   title: string,
   subtitle?: string,
+  details?: string,
   position: 'left' | 'right',
   subtitleOffset?: number,
 }

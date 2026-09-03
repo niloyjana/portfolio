@@ -36,7 +36,7 @@ const GridTile = (props: GridTileProps) => {
       const isWork = id === 'work';
       gsap.to(titleRef.current, {
         fontSize: 0.13,
-        maxWidth: 4,
+        maxWidth: 2.2, // Reduced from 4 to fit the mobile screen width
         color: isWork ? '#FFF' : '#888',
         letterSpacing: 0.4,
       });
@@ -146,6 +146,7 @@ const GridTile = (props: GridTileProps) => {
     });
     if (gridRef.current && hoverBoxRef.current) {
       gsap.to(gridRef.current.position, { z: 0.5, duration: 0.4});
+      gsap.to(gridRef.current.scale, { x: 1.08, y: 1.08, z: 1.08, duration: 0.4, ease: "back.out(1.5)" });
       gsap.to(hoverBoxRef.current.scale, { x: 1, y: 1, z: 1, duration: 0.4 });
     }
   };
@@ -158,6 +159,7 @@ const GridTile = (props: GridTileProps) => {
     });
     if (gridRef.current && hoverBoxRef.current) {
       gsap.to(gridRef.current.position, { z: 0, duration: 0.4});
+      gsap.to(gridRef.current.scale, { x: 1, y: 1, z: 1, duration: 0.4 });
       gsap.to(hoverBoxRef.current.scale, { x: 0, y: 0, z: 0, duration: 0.4 });
     }
   };
@@ -183,14 +185,14 @@ const GridTile = (props: GridTileProps) => {
       onPointerOut={onPointerOut}>
       { getGeometry() }
       <group>
-        <mesh position={[0, 0, -0.01]} ref={hoverBoxRef} scale={[0, 0, 0]}>
-          <boxGeometry args={[4, 4, 0.5]}/>
-          <meshPhysicalMaterial
-            color="#444"
+        <mesh position={[0, 0, -0.26]} ref={hoverBoxRef} scale={[0, 0, 0]}>
+          <boxGeometry args={[4.05, 4.05, 0.5]}/>
+          <meshBasicMaterial
+            color="#ffffff"
             transparent={true}
-            opacity={0.3}
+            opacity={0.05}
+            depthWrite={false}
           />
-          <Edges color="white" lineWidth={3}/>
         </mesh>
         <Text position={[0, -1.8, 0.4]} {...fontProps} ref={titleRef}>
           {title}

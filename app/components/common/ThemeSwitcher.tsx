@@ -11,7 +11,7 @@ const ThemeSwitcher = () => {
   const themeSwitcherRef = useRef<HTMLDivElement>(null);
   const { nextTheme, theme } = useThemeStore();
   const isActive = usePortalStore((state) => state.activePortalId);
-  const positionClass = isMobile ? 'top-2 right-2' : 'top-6 right-6';
+  const positionClass = 'top-4 right-4 sm:top-6 sm:right-6';
   const toggleTheme = () => nextTheme();
 
   useGSAP(() => {
