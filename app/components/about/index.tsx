@@ -24,13 +24,13 @@ const About = () => {
 
   const paragraphProps = {
     font: "./Vercetti-Regular.woff",
-    fontSize: isMobile ? 0.14 : 0.19,
+    fontSize: isMobile ? 0.15 : 0.19,
     color: "#e2e8f0",
-    maxWidth: isMobile ? 2.6 : 7.8,
+    maxWidth: isMobile ? 3.5 : 7.8,
     lineHeight: 1.5,
-    anchorX: isMobile ? ("center" as const) : ("left" as const),
+    anchorX: (isMobile ? "center" : "left") as const,
     anchorY: "top" as const,
-    textAlign: isMobile ? ("center" as const) : ("left" as const),
+    textAlign: (isMobile ? "center" : "left") as const,
   };
 
   const paragraphs = [
@@ -56,7 +56,7 @@ const About = () => {
 
     if (paragraphRef.current) {
       paragraphRef.current.children.forEach((text, i) => {
-        const yOffset = i === 0 ? 0 : i === 1 ? (isMobile ? -1.1 : -1.4) : (isMobile ? -3.5 : -3.4);
+        const yOffset = i === 0 ? 0 : i === 1 ? (isMobile ? -1.0 : -1.4) : (isMobile ? -2.4 : -3.4);
         const yAnim = (scrollOut - (1 - scrollIn)) * (5 - i);
         text.position.y = THREE.MathUtils.damp(text.position.y, yOffset + yAnim, 7, delta);
         /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -64,8 +64,8 @@ const About = () => {
       });
     }
     if (imageGroupRef.current) {
-      const yOffset = isMobile ? -6.8 : -0.39; // Adjusted to be way below the multi-line text block
-      const xOffset = isMobile ? 0 : 5.1; // Centered on mobile
+      const yOffset = isMobile ? 1.0 : -0.39; // Image directly beneath heading on mobile
+      const xOffset = isMobile ? 0 : 5.1; 
       const yAnim = (scrollOut - (1 - scrollIn)) * 3;
 
       const targetY = yOffset + yAnim;
@@ -96,14 +96,14 @@ const About = () => {
   return (
     <group position={[0, -41.5, 4.5]} rotation={[-Math.PI / 2, 0, -Math.PI / 2]}>
       <group rotation={[0, 0, Math.PI / 2]}>
-        <group ref={titleRef} position={[isMobile ? -1.05 : -4.6, 1.75, -2]}>
+        <group ref={titleRef} position={[isMobile ? -1.05 : -4.6, isMobile ? 3.0 : 1.75, -2]}>
           {getTitle()}
         </group>
 
-        <group ref={paragraphRef} position={[isMobile ? 0 : -6.2, 1.5, -2]}>
+        <group ref={paragraphRef} position={[isMobile ? 0 : -6.2, isMobile ? -0.8 : 1.5, -2]}>
           <Text position={[0, 0, 0]} {...paragraphProps}>{paragraphs[0]}</Text>
-          <Text position={[0, isMobile ? -1.1 : -1.4, 0]} {...paragraphProps}>{paragraphs[1]}</Text>
-          <Text position={[0, isMobile ? -3.5 : -3.4, 0]} {...paragraphProps}>{paragraphs[2]}</Text>
+          <Text position={[0, isMobile ? -1.0 : -1.4, 0]} {...paragraphProps}>{paragraphs[1]}</Text>
+          <Text position={[0, isMobile ? -2.4 : -3.4, 0]} {...paragraphProps}>{paragraphs[2]}</Text>
         </group>
 
         <group ref={imageGroupRef} position={[0, 0, -2]}>
