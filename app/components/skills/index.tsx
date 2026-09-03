@@ -54,10 +54,11 @@ const Skills = () => {
       <div
         style={{
           opacity,
-          transform: `translateY(${translateY}px)`,
+          transform: `translate3d(0, ${translateY}px, 0)`,
           width: '100%',
           maxWidth: '780px',
           textAlign: 'center',
+          willChange: 'transform, opacity',
         }}
       >
         {/* Section heading — matches "ABOUT ME" / "EXPERIENCE" visual weight */}
@@ -68,7 +69,7 @@ const Skills = () => {
             fontSize: 'clamp(2rem, 5vw, 3.5rem)',
             fontWeight: 400,
             letterSpacing: '0.25em',
-            marginBottom: '1.5rem',
+            marginBottom: '3.5rem',
             textTransform: 'uppercase',
           }}
         >
