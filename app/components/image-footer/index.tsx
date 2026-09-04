@@ -20,9 +20,9 @@ const ImageFooter = () => {
   const scrollProgress = useScrollStore((state) => state.scrollProgress);
   const activePortalId = usePortalStore((state) => state.activePortalId);
 
-  // Start revealing when the Skills section is halfway through its upward exit (parallax overlap)
-  const REVEAL = 0.945;
-  const fadeIn  = Math.max(0, Math.min(1, (scrollProgress - REVEAL) / 0.045));
+  // Start revealing when the Skills section is almost 70% faded out and moving up
+  const REVEAL = 0.975;
+  const fadeIn  = Math.max(0, Math.min(1, (scrollProgress - REVEAL) / 0.025));
   const opacity = fadeIn;
   const translateY = (1 - fadeIn) * 200;
 
