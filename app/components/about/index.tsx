@@ -26,7 +26,7 @@ const About = () => {
     font: "./Vercetti-Regular.woff",
     fontSize: isMobile ? 0.13 : 0.19,
     color: "#e2e8f0",
-    maxWidth: isMobile ? 3.4 : 7.8,
+    maxWidth: isMobile ? 3.65 : 7.8,
     lineHeight: isMobile ? 1.4 : 1.5,
     anchorX: isMobile ? ("center" as const) : ("left" as const),
     anchorY: "top" as const,
