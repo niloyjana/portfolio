@@ -56,7 +56,7 @@ const About = () => {
 
     if (paragraphRef.current) {
       paragraphRef.current.children.forEach((text, i) => {
-        const yOffset = i === 0 ? 0 : i === 1 ? (isMobile ? -0.7 : -1.4) : (isMobile ? -1.8 : -3.4);
+        const yOffset = i === 0 ? 0 : i === 1 ? (isMobile ? -0.95 : -1.4) : (isMobile ? -2.4 : -3.4);
         const yAnim = (scrollOut - (1 - scrollIn)) * (5 - i);
         text.position.y = THREE.MathUtils.damp(text.position.y, yOffset + yAnim, 7, delta);
         /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -102,8 +102,8 @@ const About = () => {
 
         <group ref={paragraphRef} position={[isMobile ? 0 : -6.2, isMobile ? 0.2 : 1.5, -2]}>
           <Text position={[0, 0, 0]} {...paragraphProps}>{paragraphs[0]}</Text>
-          <Text position={[0, isMobile ? -0.7 : -1.4, 0]} {...paragraphProps}>{paragraphs[1]}</Text>
-          <Text position={[0, isMobile ? -1.8 : -3.4, 0]} {...paragraphProps}>{paragraphs[2]}</Text>
+          <Text position={[0, isMobile ? -0.95 : -1.4, 0]} {...paragraphProps}>{paragraphs[1]}</Text>
+          <Text position={[0, isMobile ? -2.4 : -3.4, 0]} {...paragraphProps}>{paragraphs[2]}</Text>
         </group>
 
         <group ref={imageGroupRef} position={[0, 0, -2]}>
