@@ -78,11 +78,13 @@ const TimelinePoint = ({ point, diff, fade }: { point: WorkTimelinePoint, diff: 
           <group position={getDetailsPoint}>
             <Text 
               {...detailsTextProps} 
-              fontSize={0.12} 
-              maxWidth={2.85} 
+              fontSize={isMobile ? 0.22 : 0.12} 
+              maxWidth={isMobile ? 6.0 : 2.85} 
               anchorY="top" 
-              position={[point.position === 'left' ? (diff / 2) + 5.0 : (-diff / 2) - 2.5, 0.2, 0]} 
-              lineHeight={1.5}
+              position={isMobile 
+                ? [point.position === 'left' ? -1.3 : -0.7, -2.5, 0] 
+                : [point.position === 'left' ? (diff / 2) + 5.0 : (-diff / 2) - 2.5, 0.2, 0]} 
+              lineHeight={isMobile ? 1.4 : 1.5}
             >
               {point.details}
             </Text>
