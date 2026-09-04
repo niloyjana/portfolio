@@ -1,6 +1,7 @@
 'use client';
 import { useRef, useEffect } from "react";
 import { useScrollStore, usePortalStore } from "@stores";
+import * as THREE from "three";
 
 const SKILL_CATEGORIES = [
   {
@@ -28,14 +29,20 @@ const Skills = () => {
   useEffect(() => {
     if (!scrollEl || !containerRef.current) return;
 
-    let ticking = false;
+    let animationFrameId: number;
+    let lastTime = performance.now();
+    let currentY = window.innerHeight;
+    let currentOpacity = 0;
 
-    const updatePosition = () => {
+    const loop = (time: number) => {
+      const delta = Math.min((time - lastTime) / 1000, 0.1);
+      lastTime = time;
+
       if (!containerRef.current) return;
 
       if (usePortalStore.getState().activePortalId) {
         containerRef.current.style.display = 'none';
-        ticking = false;
+        animationFrameId = requestAnimationFrame(loop);
         return;
       }
 
@@ -48,40 +55,31 @@ const Skills = () => {
       const fadeOut = Math.max(0, Math.min(1, (scrollProgress - EXIT)   / 0.04));
       
       const vh = window.innerHeight;
-      const opacity = 1 - fadeOut;
-      const translateY = (1 - slideIn) * vh - fadeOut * (vh * 0.5);
-      
-      const isVisible = !((slideIn === 0 && opacity === 1) || opacity <= 0.01);
+      const targetOpacity = 1 - fadeOut;
+      const targetY = (1 - slideIn) * vh - fadeOut * (vh * 0.5);
 
-      if (!isVisible) {
+      // Apply the exact same damping physics as the 3D scene
+      currentY = THREE.MathUtils.damp(currentY, targetY, 7, delta);
+      currentOpacity = THREE.MathUtils.damp(currentOpacity, targetOpacity, 7, delta);
+      
+      // If fully invisible and settled, display none
+      const isVisible = currentOpacity > 0.01 || targetOpacity > 0;
+
+      if (!isVisible && Math.abs(currentY - targetY) < 1) {
         containerRef.current.style.display = 'none';
       } else {
         containerRef.current.style.display = 'flex';
-        containerRef.current.style.opacity = opacity.toString();
-        containerRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
-        // Intentionally leaving pointerEvents as 'none' inherited from parent
-        // to prevent blocking touch scroll on mobile.
+        containerRef.current.style.opacity = currentOpacity.toString();
+        containerRef.current.style.transform = `translate3d(0, ${currentY}px, 0)`;
       }
 
-      ticking = false;
+      animationFrameId = requestAnimationFrame(loop);
     };
 
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(updatePosition);
-        ticking = true;
-      }
-    };
-
-    // Run once to set initial state
-    updatePosition();
-
-    scrollEl.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    animationFrameId = requestAnimationFrame(performance.now.bind(performance));
 
     return () => {
-      scrollEl.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      cancelAnimationFrame(animationFrameId);
     };
   }, [scrollEl]);
 
