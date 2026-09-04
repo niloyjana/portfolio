@@ -42,9 +42,9 @@ const Skills = () => {
       const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
       const scrollProgress = maxScroll > 0 ? scrollEl.scrollTop / maxScroll : 0;
 
-      const REVEAL = 0.84;
-      const EXIT   = 0.93;
-      const slideIn = Math.max(0, Math.min(1, (scrollProgress - REVEAL) / 0.06));
+      const REVEAL = 0.87;
+      const EXIT   = 0.95;
+      const slideIn = Math.max(0, Math.min(1, (scrollProgress - REVEAL) / 0.05));
       const fadeOut = Math.max(0, Math.min(1, (scrollProgress - EXIT)   / 0.03));
       
       const opacity = 1 - fadeOut;
@@ -58,7 +58,8 @@ const Skills = () => {
         containerRef.current.style.display = 'flex';
         containerRef.current.style.opacity = opacity.toString();
         containerRef.current.style.transform = `translate3d(0, ${translateY}px, 0)`;
-        containerRef.current.style.pointerEvents = opacity > 0.5 ? 'auto' : 'none';
+        // Intentionally leaving pointerEvents as 'none' inherited from parent
+        // to prevent blocking touch scroll on mobile.
       }
 
       ticking = false;
