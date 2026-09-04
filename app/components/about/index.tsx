@@ -24,9 +24,9 @@ const About = () => {
 
   const paragraphProps = {
     font: "./Vercetti-Regular.woff",
-    fontSize: isMobile ? 0.125 : 0.19,
+    fontSize: isMobile ? 0.13 : 0.19,
     color: "#e2e8f0",
-    maxWidth: isMobile ? 2.8 : 7.8,
+    maxWidth: isMobile ? 3.4 : 7.8,
     lineHeight: isMobile ? 1.4 : 1.5,
     anchorX: isMobile ? ("center" as const) : ("left" as const),
     anchorY: "top" as const,
@@ -56,7 +56,7 @@ const About = () => {
 
     if (paragraphRef.current) {
       paragraphRef.current.children.forEach((text, i) => {
-        const yOffset = i === 0 ? 0 : i === 1 ? (isMobile ? -0.8 : -1.4) : (isMobile ? -2.1 : -3.4);
+        const yOffset = i === 0 ? 0 : i === 1 ? (isMobile ? -0.7 : -1.4) : (isMobile ? -1.8 : -3.4);
         const yAnim = (scrollOut - (1 - scrollIn)) * (5 - i);
         text.position.y = THREE.MathUtils.damp(text.position.y, yOffset + yAnim, 7, delta);
         /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -64,7 +64,7 @@ const About = () => {
       });
     }
     if (imageGroupRef.current) {
-      const yOffset = isMobile ? 1.5 : -0.39; // Image directly beneath heading on mobile
+      const yOffset = isMobile ? 1.6 : -0.39; // Image directly beneath heading on mobile
       const xOffset = isMobile ? 0 : 5.1; 
       const yAnim = (scrollOut - (1 - scrollIn)) * 3;
 
@@ -100,14 +100,14 @@ const About = () => {
           {getTitle()}
         </group>
 
-        <group ref={paragraphRef} position={[isMobile ? 0 : -6.2, isMobile ? 0 : 1.5, -2]}>
+        <group ref={paragraphRef} position={[isMobile ? 0 : -6.2, isMobile ? 0.2 : 1.5, -2]}>
           <Text position={[0, 0, 0]} {...paragraphProps}>{paragraphs[0]}</Text>
-          <Text position={[0, isMobile ? -0.8 : -1.4, 0]} {...paragraphProps}>{paragraphs[1]}</Text>
-          <Text position={[0, isMobile ? -2.1 : -3.4, 0]} {...paragraphProps}>{paragraphs[2]}</Text>
+          <Text position={[0, isMobile ? -0.7 : -1.4, 0]} {...paragraphProps}>{paragraphs[1]}</Text>
+          <Text position={[0, isMobile ? -1.8 : -3.4, 0]} {...paragraphProps}>{paragraphs[2]}</Text>
         </group>
 
         <group ref={imageGroupRef} position={[0, 0, -2]}>
-          <Image url="/me.jpeg" scale={isMobile ? 1.4 : 6.82} transparent toneMapped={false} />
+          <Image url="/me.jpeg" scale={isMobile ? 2.2 : 6.82} transparent toneMapped={false} />
         </group>
       </group>
     </group>

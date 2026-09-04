@@ -19,7 +19,6 @@ const Home = () => {
           <Hero/>
           <About/>
           <Experience/>
-          <Skills/>
           <Footer/>
         </ScrollWrapper>
       </CanvasLoader>
@@ -27,6 +26,7 @@ const Home = () => {
       <AboutOverlay/>
       {/* Image footer overlay sits at z-index 20 */}
       <ImageFooter/>
+      <Skills/>
       <GlobalFooterLinks/>
     </>
   );
