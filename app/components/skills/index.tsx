@@ -42,13 +42,14 @@ const Skills = () => {
       const maxScroll = scrollEl.scrollHeight - scrollEl.clientHeight;
       const scrollProgress = maxScroll > 0 ? scrollEl.scrollTop / maxScroll : 0;
 
-      const REVEAL = 0.87;
+      const REVEAL = 0.86;
       const EXIT   = 0.95;
-      const slideIn = Math.max(0, Math.min(1, (scrollProgress - REVEAL) / 0.05));
-      const fadeOut = Math.max(0, Math.min(1, (scrollProgress - EXIT)   / 0.03));
+      const slideIn = Math.max(0, Math.min(1, (scrollProgress - REVEAL) / 0.08));
+      const fadeOut = Math.max(0, Math.min(1, (scrollProgress - EXIT)   / 0.04));
       
+      const vh = window.innerHeight;
       const opacity = 1 - fadeOut;
-      const translateY = (1 - slideIn) * 800 - fadeOut * 600;
+      const translateY = (1 - slideIn) * vh - fadeOut * (vh * 0.5);
       
       const isVisible = !((slideIn === 0 && opacity === 1) || opacity <= 0.01);
 
