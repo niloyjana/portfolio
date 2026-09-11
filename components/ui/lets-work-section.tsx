@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { ArrowUpRight, Mail, ArrowLeft, Phone } from "lucide-react"
+import { isMobile } from "react-device-detect"
 
 type ContactMethod = 'mail' | 'phone' | 'linkedin'
 
@@ -47,7 +48,11 @@ export function LetsWorkTogether() {
     if (contactMethod === 'mail') {
       const subject = encodeURIComponent("Let's Work Together!");
       const body = encodeURIComponent("Hi Niloy,\n\nI'd like to discuss a project with you.");
-      window.open(`mailto:niloyjana2005@gmail.com?subject=${subject}&body=${body}`, "_blank");
+      if (isMobile) {
+        window.open(`mailto:niloyjana2005@gmail.com?subject=${subject}&body=${body}`, "_blank");
+      } else {
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=niloyjana2005@gmail.com&su=${subject}&body=${body}`, "_blank");
+      }
     }
     else if (contactMethod === 'phone') window.location.href = "tel:+919330996391"
     else if (contactMethod === 'linkedin') window.open("https://www.linkedin.com/in/niloy-jana/", "_blank")
