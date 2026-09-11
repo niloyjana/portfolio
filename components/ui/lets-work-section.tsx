@@ -223,10 +223,10 @@ export function LetsWorkTogether() {
 
 
         <div
-          className="absolute top-[10%] left-1/2 -translate-x-1/2 w-full flex flex-col items-center pointer-events-none"
+          className="absolute top-[15%] sm:top-[10%] left-1/2 -translate-x-1/2 w-full flex flex-col items-center pointer-events-none"
         >
             <h2
-              className="text-center w-full text-5xl font-light tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className="text-center w-full text-6xl font-light tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{
                 opacity: isClicked ? 0 : 1,
                 transform: isClicked ? "translateY(-40px) scale(0.95)" : "translateY(0) scale(1)",
@@ -255,7 +255,7 @@ export function LetsWorkTogether() {
             </h2>
         </div>
 
-        <div className="absolute top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="absolute top-[50%] sm:top-[55%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
             <div 
               className="relative flex size-20 items-center justify-center sm:size-24 cursor-pointer pointer-events-auto group"
               onMouseEnter={() => setIsHovered(true)}
@@ -311,14 +311,14 @@ export function LetsWorkTogether() {
         </div>
 
         <div
-          className="absolute bottom-[20%] left-1/2 -translate-x-1/2 w-full max-w-md flex flex-col items-center gap-4 text-center transition-all duration-500 delay-100 pointer-events-none"
+          className="absolute bottom-[15%] sm:bottom-[20%] left-1/2 -translate-x-1/2 w-full max-w-md px-6 flex flex-col items-center gap-4 text-center transition-all duration-500 delay-100 pointer-events-none"
           style={{
             opacity: isClicked ? 0 : 1,
             transform: isClicked ? "translateY(20px)" : "translateY(0)",
             pointerEvents: isClicked ? "none" : "auto",
           }}
         >
-          <p className="max-w-md text-sm leading-relaxed text-white/80">
+          <p className="max-w-md text-base sm:text-sm leading-relaxed text-white/80">
             As an aspiring engineer, I'm always looking for new challenges. Whether you have a project to launch or a team to grow, I'd love to connect!
           </p>
         </div>
