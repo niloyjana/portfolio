@@ -31,6 +31,7 @@ export function LetsWorkTogether() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [isButtonHovered, setIsButtonHovered] = useState(false)
   const [contactMethod, setContactMethod] = useState<ContactMethod>('mail')
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
@@ -132,35 +133,42 @@ export function LetsWorkTogether() {
                 <div className="absolute inset-0 pointer-events-none">
                   {/* Phone - Top Left */}
                   <button 
-                    onClick={(e) => { e.stopPropagation(); setContactMethod('phone'); }}
-                    className="absolute -top-12 -left-8 sm:-top-16 sm:-left-12 size-12 sm:size-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 opacity-0 scale-50 group-hover/connect:opacity-100 group-hover/connect:scale-100 pointer-events-none group-hover/connect:pointer-events-auto shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] z-10"
+                    onClick={(e) => { e.stopPropagation(); setContactMethod('phone'); setIsMobileMenuOpen(false); }}
+                    className={`absolute -top-12 -left-8 sm:-top-16 sm:-left-12 size-12 sm:size-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] z-10 ${isMobileMenuOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-50 group-hover/connect:opacity-100 group-hover/connect:scale-100 pointer-events-none group-hover/connect:pointer-events-auto'}`}
                   >
                     <Phone className="size-5 text-white" />
                   </button>
                   {/* LinkedIn - Middle Left */}
                   <button 
-                    onClick={(e) => { e.stopPropagation(); setContactMethod('linkedin'); }}
-                    className="absolute top-1/2 -translate-y-1/2 -left-16 sm:-left-20 size-12 sm:size-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 opacity-0 scale-50 group-hover/connect:opacity-100 group-hover/connect:scale-100 pointer-events-none group-hover/connect:pointer-events-auto shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] z-10 delay-75"
+                    onClick={(e) => { e.stopPropagation(); setContactMethod('linkedin'); setIsMobileMenuOpen(false); }}
+                    className={`absolute top-1/2 -translate-y-1/2 -left-16 sm:-left-20 size-12 sm:size-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] z-10 delay-75 ${isMobileMenuOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-50 group-hover/connect:opacity-100 group-hover/connect:scale-100 pointer-events-none group-hover/connect:pointer-events-auto'}`}
                   >
                     <LinkedinIcon className="size-5 text-white" />
                   </button>
                   {/* Mail - Bottom Left */}
                   <button 
-                    onClick={(e) => { e.stopPropagation(); setContactMethod('mail'); }}
-                    className="absolute -bottom-12 -left-8 sm:-bottom-16 sm:-left-12 size-12 sm:size-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 opacity-0 scale-50 group-hover/connect:opacity-100 group-hover/connect:scale-100 pointer-events-none group-hover/connect:pointer-events-auto shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] z-10 delay-150"
+                    onClick={(e) => { e.stopPropagation(); setContactMethod('mail'); setIsMobileMenuOpen(false); }}
+                    className={`absolute -bottom-12 -left-8 sm:-bottom-16 sm:-left-12 size-12 sm:size-14 rounded-full bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] z-10 delay-150 ${isMobileMenuOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-50 group-hover/connect:opacity-100 group-hover/connect:scale-100 pointer-events-none group-hover/connect:pointer-events-auto'}`}
                   >
                     <Mail className="size-5 text-white" />
                   </button>
                 </div>
-                {contactMethod === 'mail' && (
-                  <Mail className="size-4 transition-all duration-500 sm:size-5" strokeWidth={1.5} style={{ color: isButtonHovered ? "black" : "white" }} />
-                )}
-                {contactMethod === 'phone' && (
-                  <Phone className="size-4 transition-all duration-500 sm:size-5" strokeWidth={1.5} style={{ color: isButtonHovered ? "black" : "white" }} />
-                )}
-                {contactMethod === 'linkedin' && (
-                  <LinkedinIcon className="size-4 transition-all duration-500 sm:size-5" strokeWidth={1.5} style={{ color: isButtonHovered ? "black" : "white" }} />
-                )}
+                
+                {/* Clickable Icon Wrapper to toggle options on mobile */}
+                <div 
+                  className="flex items-center justify-center p-2 -m-2 cursor-pointer z-20"
+                  onClick={(e) => { e.stopPropagation(); setIsMobileMenuOpen(!isMobileMenuOpen); }}
+                >
+                  {contactMethod === 'mail' && (
+                    <Mail className="size-4 transition-all duration-500 sm:size-5" strokeWidth={1.5} style={{ color: isButtonHovered ? "black" : "white" }} />
+                  )}
+                  {contactMethod === 'phone' && (
+                    <Phone className="size-4 transition-all duration-500 sm:size-5" strokeWidth={1.5} style={{ color: isButtonHovered ? "black" : "white" }} />
+                  )}
+                  {contactMethod === 'linkedin' && (
+                    <LinkedinIcon className="size-4 transition-all duration-500 sm:size-5" strokeWidth={1.5} style={{ color: isButtonHovered ? "black" : "white" }} />
+                  )}
+                </div>
                 
                 {/* Vertical Separator */}
                 <div 
