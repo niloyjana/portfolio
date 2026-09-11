@@ -49,7 +49,7 @@ export function LetsWorkTogether() {
       const body = encodeURIComponent("Hi Niloy,\n\nI'd like to discuss a project with you.");
       window.open(`mailto:niloyjana2005@gmail.com?subject=${subject}&body=${body}`, "_blank");
     }
-    else if (contactMethod === 'phone') window.location.href = "tel:+919876543210"
+    else if (contactMethod === 'phone') window.location.href = "tel:+919330996391"
     else if (contactMethod === 'linkedin') window.open("https://www.linkedin.com/in/niloy-jana/", "_blank")
   }
 
