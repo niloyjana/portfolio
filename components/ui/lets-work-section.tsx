@@ -226,7 +226,7 @@ export function LetsWorkTogether() {
           className="absolute top-[15%] sm:top-[10%] left-1/2 -translate-x-1/2 w-full flex flex-col items-center pointer-events-none"
         >
             <h2
-              className="text-center w-full text-6xl font-light tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+              className="text-center w-full text-6xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
               style={{
                 opacity: isClicked ? 0 : 1,
                 transform: isClicked ? "translateY(-40px) scale(0.95)" : "translateY(0) scale(1)",
@@ -239,7 +239,7 @@ export function LetsWorkTogether() {
                     transform: isHovered && !isClicked ? "translateY(-8%)" : "translateY(0)",
                   }}
                 >
-                  Let's work
+                  Let's Work
                 </span>
               </span>
               <span className="block overflow-hidden pb-4 -mb-4">
@@ -249,7 +249,7 @@ export function LetsWorkTogether() {
                     transform: isHovered && !isClicked ? "translateY(-8%)" : "translateY(0)",
                   }}
                 >
-                  <span className="text-white/80">together</span>
+                  <span className="text-white/80">Together</span>
                 </span>
               </span>
             </h2>
