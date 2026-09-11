@@ -43,7 +43,11 @@ export function LetsWorkTogether() {
 
   const handleConnect = (e: React.MouseEvent) => {
     e.stopPropagation()
-    if (contactMethod === 'mail') window.open("https://mail.google.com/mail/?view=cm&fs=1&to=niloyjana2005@gmail.com", "_blank")
+    if (contactMethod === 'mail') {
+      const subject = encodeURIComponent("Let's Work Together!");
+      const body = encodeURIComponent("Hi Niloy,\n\nI'd like to discuss a project with you.");
+      window.open(`mailto:niloyjana2005@gmail.com?subject=${subject}&body=${body}`, "_blank");
+    }
     else if (contactMethod === 'phone') window.location.href = "tel:+919876543210"
     else if (contactMethod === 'linkedin') window.open("https://www.linkedin.com/in/niloy-jana/", "_blank")
   }
